@@ -1,7 +1,7 @@
 import {useState, useEffect} from "react"
 import Error from "./Error";
 
-const Formulario = ({pacientes, setPacientes}) => {
+const Formulario = ({pacientes, setPacientes, paciente}) => {
     const [nombre, setNombre] = useState("");
     const [propietario, setPropietario] = useState("");
     const [email, setEmail] = useState("");
@@ -9,6 +9,10 @@ const Formulario = ({pacientes, setPacientes}) => {
     const [sintomas, setSintomas] = useState("");
 
     const [error, setError] = useState(false);
+
+    useEffect (() => {
+
+    }, [paciente])
 
     const generarId = () => {
         const random = Math.random().toString(36).slice(2);
@@ -22,7 +26,7 @@ const Formulario = ({pacientes, setPacientes}) => {
 
         //validacion del formulario
 
-        if([nombre,propietario,email,fecha,sintomas].includes("")){
+        if([nombre, propietario, email, fecha, sintomas].includes("")){
             console.log ("Hay almenos un campo vacio")
 
             setError(true)
@@ -48,12 +52,12 @@ const Formulario = ({pacientes, setPacientes}) => {
         //console.log(objetoPaciente);
 
         //Reiniciar el form
-
-        setNombre ("")
-        setPropietario ("")
-        setEmail ("")
-        setFecha ("")
-        setSintomas ("")
+        
+        setNombre("");
+        setPropietario("");
+        setEmail("");
+        setFecha("");
+        setSintomas("");
 
 
     }
