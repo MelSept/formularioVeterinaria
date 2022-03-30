@@ -1,7 +1,7 @@
 import Paciente from "./Paciente"
 
 const ListadoPacientes = (props) => {
-  const {pacientes, setPaciente} = props; // Destructuring de los props
+  const {pacientes, setPaciente, eliminarPaciente} = props; // Destructuring de los props
   
   return (
       <div className="md:w-1/2 lg:w-3/5 md:h-screen overflow-y-scroll">
@@ -18,7 +18,8 @@ const ListadoPacientes = (props) => {
               <Paciente
                   key={paciente.id}
                   paciente={paciente} 
-                  setPaciente={setPaciente}                 
+                  setPaciente={setPaciente} 
+                  eliminarPaciente={eliminarPaciente}                
               />  
             ))}
           </> 
