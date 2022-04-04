@@ -1,30 +1,30 @@
 import {useState, useEffect} from "react"
-import Error from "./Error";
+import Error from "../Error/Error";
 
-const Formulario = ({pacientes, setPacientes, paciente}) => {
-    const [nombre, setNombre] = useState("");
-    const [propietario, setPropietario] = useState("");
+const Formulary = ({patients, setPatients, patient}) => {
+    const [name, setName] = useState("");
+    const [owner, setOwner] = useState("");
     const [email, setEmail] = useState("");
-    const [fecha, setFecha] = useState("");
-    const [sintomas, setSintomas] = useState("");
+    const [date, setDate] = useState("");
+    const [symptoms, setSymptoms] = useState("");
 
     const [error, setError] = useState(false);
 
     useEffect (() => {
-        if( Object.keys(paciente).length > 0 ){
-            setNombre(paciente.nombre)
-            setPropietario(paciente.propietario)
-            setEmail(paciente.email)
-            setFecha(paciente.fecha)
-            setSintomas(paciente.sintomas)
+        if( Object.keys(patient).length > 0 ){
+            setName(patient.name)
+            setOwner(patient.owner)
+            setEmail(patient.email)
+            setDate(patient.date)
+            setSymptoms(patient.symptoms)
         } 
-    }, [paciente])
+    }, [patient])
 
     const generarId = () => {
         const random = Math.random().toString(36).slice(2);
-        const fecha = Date.now().toString(36);
+        const date = Date.now().toString(36);
 
-        return random + fecha;
+        return random + date;
     }
 
     const handleSubmit = (e) => { 
@@ -32,7 +32,7 @@ const Formulario = ({pacientes, setPacientes, paciente}) => {
 
         //validacion del formulario
 
-        if([nombre, propietario, email, fecha, sintomas].includes("")){
+        if([name, owner, email, date, symptoms].includes("")){
             console.log ("Hay almenos un campo vacio")
 
             setError(true)
@@ -43,28 +43,28 @@ const Formulario = ({pacientes, setPacientes, paciente}) => {
 
         //Objeto Paciente
 
-        const objetoPaciente = {
-            nombre,
-            propietario,
+        const objectPatient = {
+            name,
+            owner,
             email,
-            fecha,
-            sintomas,
+            date,
+            symptoms,
             id: generarId()
         }
 
-        if (paciente.id) {
+        if (patient.id) {
             //editando el registro
-            objetoPaciente.id = paciente.id
-            const pacientesActualizados = pacientes.map (pacienteState => pacienteState.id ===
-            paciente.id ? objetoPaciente : pacienteState);
+            objectPatient.id = patient.id
+            const patientUpdated = patients.map (patientState => patientState.id ===
+            patient.id ? objectPatient : patientState);
             
-            setPacientes(pacientesActualizados);
-            setPaciente({})
+            setPatients(patientUpdated);
+            setPatient({})
 
         } else {
             //Nuevo registro
-            objetoPaciente.id = generarId();
-            setPacientes([...pacientes, objetoPaciente]);            
+            objectPatient.id = generarId();
+            setPatients([...patients, objectPatient]);            
 
         }   
        
@@ -72,11 +72,11 @@ const Formulario = ({pacientes, setPacientes, paciente}) => {
 
         //Reiniciar el form
         
-        setNombre("");
-        setPropietario("");
+        setName("");
+        setOwner("");
         setEmail("");
-        setFecha("");
-        setSintomas("");
+        setDate("");
+        setSymptoms("");
 
 
     }
@@ -103,8 +103,8 @@ const Formulario = ({pacientes, setPacientes, paciente}) => {
                         type="text"
                         placeholder="Nombre de la Mascota"
                         className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-                        value={nombre}
-                        onChange = {(e) => setNombre(e.target.value)}
+                        value={name}
+                        onChange = {(e) => setName(e.target.value)}
                         /> 
                 </div>
                 <div className="mb-5">
@@ -116,8 +116,8 @@ const Formulario = ({pacientes, setPacientes, paciente}) => {
                         type="text"
                         placeholder="Nombre del Propietario"
                         className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-                        value={propietario}
-                        onChange = {(e) => setPropietario(e.target.value)}/> 
+                        value={owner}
+                        onChange = {(e) => setOwner(e.target.value)}/> 
                 </div>
                 <div className="mb-5">
                     <label htmlFor="email" className="block text-gray-700 uppercase font-bold">
@@ -139,8 +139,8 @@ const Formulario = ({pacientes, setPacientes, paciente}) => {
                         id="alta"
                         type="date"
                         className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
-                        value={fecha}
-                        onChange = {(e) => setFecha(e.target.value)}/> 
+                        value={date}
+                        onChange = {(e) => setDate(e.target.value)}/> 
                 </div>
                 <div className="mb-5">
                     <label htmlFor="sintomas" className="block text-gray-700 uppercase font-bold">
@@ -150,14 +150,14 @@ const Formulario = ({pacientes, setPacientes, paciente}) => {
                     id="sintomas"
                     className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                     placeholder="Describe los Sintomas"
-                    value={sintomas}
-                    onChange = {(e) => setSintomas(e.target.value)}/>                    
+                    value={symptoms}
+                    onChange = {(e) => setSymptoms(e.target.value)}/>                    
                 </div>
                 <input
                     type="submit"
                     className="bg-indigo-600 w-full p-3 text-white font-bold hover:bg-indigo-700
                     cursor-pointer transition-all"  
-                    value = { paciente.id ? "Editar Paciente" : "Agregar Paciente"}             
+                    value = { patient.id ? "Editar Paciente" : "Agregar Paciente"}             
                 />
             </form>
         </div>
@@ -165,4 +165,4 @@ const Formulario = ({pacientes, setPacientes, paciente}) => {
 
 }
 
-export default Formulario;
+export default Formulary;
